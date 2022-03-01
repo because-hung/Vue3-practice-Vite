@@ -5,6 +5,9 @@ defineProps({
   msg: String,
 });
 
+//data
+const filterData = reactive(JSON.parse(localStorage.getItem("NumData"))) || reactive([]);
+console.log(filterData)
 const count = ref(0);
 const data = reactive([
   {
@@ -36,18 +39,30 @@ const data = reactive([
     user: "deca",
   },
 ]);
-const filterData = reactive([]);
+
+// 
+//function
+
+
 const getStar = function (item) {
- if(!filterData.includes(item)){
-   filterData.push(item)
- }
- console.log(filterData)
+  console.log(filterData)
+  if (filterData.includes(item)) {
+      }
+    else{
+    filterData.push(item);
+       localStorage.setItem("NumData", JSON.stringify(filterData));
+       }
+
+  console.log(filterData);
+    
 };
-const cancelStar = function(item){
-if(filterData.includes(item)){
-   filterData.splice(0,1)
- }
- console.log(filterData)
+const cancelStar = function (item) {
+  if (filterData.includes(item)) {
+    filterData.splice(0, 1);
+         localStorage.setItem("NumData", JSON.stringify(filterData));
+  }
+  console.log(filterData);
+
 };
 
 </script>
