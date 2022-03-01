@@ -6,8 +6,9 @@ defineProps({
 });
 
 //data
-const filterData = reactive(JSON.parse(localStorage.getItem("NumData"))) || reactive([]);
-console.log(filterData)
+const filterData =
+  reactive(JSON.parse(localStorage.getItem("NumData"))) || reactive([]);
+console.log(filterData);
 const count = ref(0);
 const data = reactive([
   {
@@ -40,31 +41,36 @@ const data = reactive([
   },
 ]);
 
-// 
+//
 //function
 
-
 const getStar = function (item) {
-  console.log(filterData)
-  if (filterData.includes(item)) {
-      }
-    else{
+  console.log(filterData);
+
+  const found = filterData.find((el) => {
+    return el.id === item.id;
+  });
+
+  if (!found) {
     filterData.push(item);
-       localStorage.setItem("NumData", JSON.stringify(filterData));
-       }
+    localStorage.setItem("NumData", JSON.stringify(filterData));
+  }
 
   console.log(filterData);
-    
 };
 const cancelStar = function (item) {
-  if (filterData.includes(item)) {
-    filterData.splice(0, 1);
-         localStorage.setItem("NumData", JSON.stringify(filterData));
+
+    const found = filterData.find((el) => {
+    return el.id === item.id;
+  });
+
+  if (found) {
+   filterData.splice(0, 1);
+    localStorage.setItem("NumData", JSON.stringify(filterData));
   }
+
   console.log(filterData);
-
 };
-
 </script>
 
 <template>
