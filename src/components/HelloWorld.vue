@@ -73,7 +73,7 @@ const cancelStar = function (item) {
 
 //work obj array
 
-let foodData = reactive([
+let foodData = ref([
   {
     name: "tom17",
     foodColumn: [
@@ -132,13 +132,37 @@ let foodData = reactive([
   },
 ]);
 
-//work restart 看這裡
+
+
+//work restart 看這裡 reactive
+// const filtered = ["K", "pp", "bay", "leon"];
+// const objfilter = Object.entries(foodData);
+//   const filteredData = objfilter.filter((it) => {  //跑左邊比對
+//     for (let i = 0; i < filtered.length; i++) {
+//       if (it[1].name.includes(filtered[i])) {  //陣列比對 跑右邊
+//         console.log("123");
+//         return it;  //回傳值
+//       }
+//     }
+//   });
+ 
+//   console.log("filtered", filteredData);
+
+
+
+
+
+
+
+//work restart 看這裡 (ref)
 const filtered = ["K", "pp", "bay", "leon"];
 
-const objfilter = Object.entries(foodData);
+const objfilter = Object.entries(foodData.value);
 
 
-  const filteredData = objfilter.filter((it) => {  //跑左邊比對
+
+console.log(objfilter)
+const filteredData = ref( objfilter.filter((it) => {  //跑左邊比對
     for (let i = 0; i < filtered.length; i++) {
       if (it[1].name.includes(filtered[i])) {  //陣列比對 跑右邊
         console.log("123");
@@ -146,7 +170,7 @@ const objfilter = Object.entries(foodData);
       }
     }
 
-  });
+  }));
 
  
   console.log("filtered", filteredData);
@@ -169,12 +193,17 @@ const objfilter = Object.entries(foodData);
 // }
 
 // console.log('deta', deta);
+let arrayA = ref(["1", "2", "3", "4", "5"])
+let arrayB = ref(["5", "6", "7", "8", "9"])
+
 
 console.log(foodData);
 // let deta = reactive(foodData)
 // console.log('default', deta)
 let status = ref(0)
 const changeTem = function () {
+  //work restart
+    foodData.value = filteredData.value;
 //   // deta = reactive(filteredData)
 //   // console.log('change', deta)
 //   const filteredData = objfilter.filter((it) => {
@@ -187,17 +216,16 @@ const changeTem = function () {
 
 //     // return it[1].name ==  filtered[index]
 //   });
-
+arrayA.value = arrayB.value
 //   // for 迴圈  判斷  index 值 change
 //   console.log("filtered", filteredData);
-//   // foodData = reactive(filteredData);
-status.value = 1
+  // foodData = reactive(filteredData);
+
+ console.log(foodData)
 
 };
- console.log(status)
 
-let arrayA = reactive(["1", "2", "3", "4", "5"])
-let arrayB = reactive(["5", "6", "7", "8", "9"])
+const txt = ref(0)
 
 
 
@@ -207,10 +235,11 @@ let arrayB = reactive(["5", "6", "7", "8", "9"])
 
 <template>
   <button @click="changeTem">123</button>
-
+  <input type="text" v-model="txt">
+  <h1>{{txt}}</h1>
   <div class="star">
     <div class="row">
-      <div class="col-3 p-3" v-for="(item, i) in arrayA" :key="i">
+      <div class="col-3 p-3" v-for="(item, i) in foodData" :key="i">
         <div class="card">
           <img src="" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -233,12 +262,12 @@ let arrayB = reactive(["5", "6", "7", "8", "9"])
   <h2 class="mt-5">主單</h2>
   <div class="content mt-5 container">
     <div class="row mx-auto">
-      <div class="col-3 p-3" v-for="(item, i) in data" :key="i">
+      <div class="col-3 p-3" v-for="(item, i) in arrayA" :key="i">
         <div class="card">
           <img src="" class="card-img-top" alt="..." />
           <div class="card-body">
             <div class="r d-flex justify-content-around mb-3">
-              <h5 class="card-title">Card title + {{ item.user }}</h5>
+              <h5 class="card-title">Card title + {{ item }}</h5>
               <button @click="getStar(item)">{{ item.id }}</button>
             </div>
 
