@@ -1,9 +1,26 @@
 <script setup>
 import { computed, onUpdated, reactive, ref, watch } from "vue";
+import Practice from './Practice.vue'
 
 defineProps({
   msg: String,
 });
+
+
+const sum = ref(1);
+//computed
+const num = computed(() => {
+  return sum.value * 2;
+})
+
+const changeSum = function(){
+sum.value = 2
+}
+
+watch(num,() => {
+  console.log(num);
+})
+
 
 //data
 const filterData =
@@ -234,9 +251,14 @@ const txt = ref(0)
 </script>
 
 <template>
+<Practice></Practice>
+<p></p>
   <button @click="changeTem">123</button>
   <input type="text" v-model="txt">
   <h1>{{txt}}</h1>
+  <h2 >sum = {{sum}}</h2>
+  <h2>num = {{num}}</h2>
+  <button @click="changeSum()">change Sum</button>
   <div class="star">
     <div class="row">
       <div class="col-3 p-3" v-for="(item, i) in foodData" :key="i">
@@ -262,6 +284,7 @@ const txt = ref(0)
   <h2 class="mt-5">主單</h2>
   <div class="content mt-5 container">
     <div class="row mx-auto">
+      <keep-alive>
       <div class="col-3 p-3" v-for="(item, i) in arrayA" :key="i">
         <div class="card">
           <img src="" class="card-img-top" alt="..." />
@@ -279,6 +302,7 @@ const txt = ref(0)
           </div>
         </div>
       </div>
+          </keep-alive>
     </div>
   </div>
 
