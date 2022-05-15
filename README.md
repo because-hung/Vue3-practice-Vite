@@ -1,6 +1,6 @@
 這個repo是用來練習測試 跟紀錄一些工作上的語法
 
-vue3 + 
+vue3 + vite
 
 # Vue 3 + Vite
 
