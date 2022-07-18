@@ -17,9 +17,9 @@ const changeSum = function(){
 sum.value = 2
 }
 
-watch(num,() => {
-  console.log(num);
-})
+// watch(num,() => {
+//   console.log(num);
+// })
 
 
 //data
@@ -61,93 +61,132 @@ const data = reactive([
 //
 //function
 
-const getStar = function (item) {
-  console.log(filterData);
+// const getStar = function (item) {
+//   console.log(filterData);
 
-  const found = filterData.find((el) => {
-    return el.id === item.id;
-  });
+//   const found = filterData.find((el) => {
+//     return el.id === item.id;
+//   });
 
-  if (!found) {
-    filterData.push(item);
-    localStorage.setItem("NumData", JSON.stringify(filterData));
-  }
+//   if (!found) {
+//     filterData.push(item);
+//     localStorage.setItem("NumData", JSON.stringify(filterData));
+//   }
 
-  console.log(filterData);
-};
-const cancelStar = function (item) {
-  const found = filterData.find((el) => {
-    return el.id === item.id;
-  });
+//   console.log(filterData);
+// };
+// const cancelStar = function (item) {
+//   const found = filterData.find((el) => {
+//     return el.id === item.id;
+//   });
 
-  if (found) {
-    filterData.splice(0, 1);
-    localStorage.setItem("NumData", JSON.stringify(filterData));
-  }
+//   if (found) {
+//     filterData.splice(0, 1);
+//     localStorage.setItem("NumData", JSON.stringify(filterData));
+//   }
 
-  console.log(filterData);
-};
+//   console.log(filterData);
+// };
 
 //work obj array
 
-let foodData = ref([
+let foodData = reactive([
   {
     name: "tom17",
-    foodColumn: [
-      {
+      
         country: "USA",
-        id: "01",
+        id: "live",
         food: [
           {
+            id:153252,
             cookie: "straw",
           },
+          {
+            id:744138,
+            cookie: "banana",
+          },
+          {
+            id:184312,
+            cookie: "menlon",
+          },
         ],
-      },
-    ],
+      
+    
   },
   {
     name: "bay12",
-    foodColumn: [
-      {
+ 
         country: "CANA",
-        id: "02",
+        id: "fixtures",
         food: [
           {
+            id:102482,
             cookie: "straw",
           },
+           {
+            id:407782,
+            cookie: "water",
+          },
+           {
+            id:889782,
+            cookie: "coden",
+          },
+           {
+            id:482187,
+            cookie: "beer",
+          },
+           {
+            id:105538,
+            cookie: "queen",
+          },
         ],
-      },
-    ],
+
   },
   {
     name: "Kom",
-    foodColumn: [
-      {
+  
         country: "lorea",
-        id: "03",
+        id: "finish",
         food: [
           {
-            cookie: "straw",
+            id:102738,
+            cookie: "stw"
+          },
+           {
+            id:780457,
+            cookie: "kta"
           },
         ],
-      },
-    ],
+
   },
   {
     name: "pp",
-    foodColumn: [
-      {
+  
         country: "USAaaa",
-        id: "04",
+        id: "others",
         food: [
           {
-            cookie: "straw",
+            id:102239,
+            cookie: "sneak",
+          },
+          {
+            id:402493,
+            cookie: "fgh",
+          },
+          {
+            id:987662,
+            cookie: "tty",
+          },
+          {
+            id:569732,
+            cookie: "skll",
           },
         ],
       },
-    ],
-  },
+
 ]);
+
+
 
 
 
@@ -165,6 +204,40 @@ let foodData = ref([
  
 //   console.log("filtered", filteredData);
 
+let AryAA = [2,4,6,8,10,12,14]
+
+const comp = computed(() => {
+console.log('in')
+
+let res = ref(false)
+
+const decad = AryAA.reduce((acc, cur)=>{
+  if(cur > 10){
+    acc.push(cur)
+  }
+
+  return acc
+},[])
+console.log(decad)
+
+decad.length > 3 ? res.value = true : res.value = false
+  
+
+
+return res
+})
+
+setTimeout(()=>{
+  AryAA = [2,10,14,16,22,13]
+  
+console.log('computed', comp.value)
+  
+},2000)
+
+console.log('computed', comp.value)
+
+
+
 
 
 
@@ -174,23 +247,23 @@ let foodData = ref([
 //work restart 看這裡 (ref)
 const filtered = ["K", "pp", "bay", "leon"];
 
-const objfilter = Object.entries(foodData.value);
+const objfilter = Object.entries(foodData);
 
 
+ console.log(foodData)
+ console.log(objfilter)
+// const filteredData = ref( objfilter.filter((it) => {  //跑左邊比對
+//     for (let i = 0; i < filtered.length; i++) {
+//       if (it[1].name.includes(filtered[i])) {  //陣列比對 跑右邊
+//         console.log("123");
+//         return it;  //回傳值
+//       }
+//     }
 
-console.log(objfilter)
-const filteredData = ref( objfilter.filter((it) => {  //跑左邊比對
-    for (let i = 0; i < filtered.length; i++) {
-      if (it[1].name.includes(filtered[i])) {  //陣列比對 跑右邊
-        console.log("123");
-        return it;  //回傳值
-      }
-    }
-
-  }));
+//   }));
 
  
-  console.log("filtered", filteredData);
+  // console.log("filtered", filteredData);
 
 
 
@@ -214,7 +287,15 @@ let arrayA = ref(["1", "2", "3", "4", "5"])
 let arrayB = ref(["5", "6", "7", "8", "9"])
 
 
-console.log(foodData);
+console.log(foodData[0]);
+
+
+const ttData = objfilter.reduce((acc, cur) => {
+
+  return  acc.concat(cur)
+},[])
+console.log(ttData)
+
 // let deta = reactive(foodData)
 // console.log('default', deta)
 let status = ref(0)
@@ -252,9 +333,11 @@ const txt = ref(0)
 
 <template>
 <Practice></Practice>
+<section v-if='false'>
 <p></p>
   <button @click="changeTem">123</button>
   <input type="text" v-model="txt">
+  <h2>{{comp}}</h2>
   <h1>{{txt}}</h1>
   <h2 >sum = {{sum}}</h2>
   <h2>num = {{num}}</h2>
@@ -312,6 +395,7 @@ const txt = ref(0)
       <li>{{ item }}</li>
     </ul>
   </div> -->
+  </section>
 </template>
 
 <style scoped>
