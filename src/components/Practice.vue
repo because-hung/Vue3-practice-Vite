@@ -11,11 +11,11 @@ const imgList = reactive([
     img2: 'src/assets/test/btn02.png',
 },
     {
-    img1: 'src/assets/test/btn02.jpg',
+    img1: 'src/assets/test/btn02.png',
     img2: 'src/assets/test/btn03.png',
 },
  {
-    img1: 'src/assets/test/btn03.jpg',
+    img1: 'src/assets/test/btn03.png',
     img2: 'src/assets/test/btn00.png',
 },
 
@@ -66,12 +66,24 @@ if(status.value == true){
 return result
 })
 
+const anFlag = ref(false)
+
+function toAN(){
+    console.log('an click')
+    anFlag.value = true
+    setTimeout(() => {
+    anFlag.value = false
+  }, 1300)
+}
+
 
 </script>
 <template>
 <div class="container">
-    <h2>test vite require</h2>
-<ul  v-for='(item, index, i) in imgList' :key='i'>
+    <h2 @click='toAN()'>test animation</h2>
+    <div v-if="anFlag" class="box displayB">copied</div>
+    <h2 v-if='false'>test vite require</h2>
+<ul v-if='false' v-for='(item, index, i) in imgList' :key='i'>
     <li class="testImg"><img :src="item.img1" alt=""></li>
 </ul>
 </div>
@@ -85,9 +97,28 @@ return result
 </template>
 
 <style scoped>
+.box{
+    margin: 0 auto;
+    background: black;
+    width: 120px;
+    height: 50px;
+    color: white;
+    border-radius: 20px;
+}
 .testImg > img{
 width: 50px;
 height: 50px;
+}
+
+.displayB{
+  animation: displayB 1.5s;
+
+}
+
+@keyframes displayB {
+  0% { opacity: 0.2;}
+    50% { opacity: 1;}
+    100% { opacity: 0.2;}
 }
       
 
