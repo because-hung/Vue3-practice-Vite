@@ -69,10 +69,13 @@ return result
 const anFlag = ref(false)
 
 function toAN(){
+    const btnDom = document.querySelector('.imgB')
+btnDom.style.zIndex = 0
     console.log('an click')
     anFlag.value = true
     setTimeout(() => {
     anFlag.value = false
+    btnDom.style.zIndex = -1
   }, 1300)
 }
 
@@ -80,7 +83,12 @@ function toAN(){
 </script>
 <template>
 <div class="container">
-    <h2 @click='toAN()'>test animation</h2>
+    <h2 @click='toAN()' class="anTitle">test animation</h2>
+    <div class="testBall">123<div class="ball"></div></div>
+    <div class="group">
+    <img class='imgA imgC' src="@/assets/test/btn04.jpg" alt="">
+    <img class='imgB imgC' src="@/assets/test/btn05.jpg" alt="">
+    </div>
     <div v-if="anFlag" class="box displayB">copied</div>
     <h2 v-if='false'>test vite require</h2>
 <ul v-if='false' v-for='(item, index, i) in imgList' :key='i'>
@@ -97,6 +105,34 @@ function toAN(){
 </template>
 
 <style scoped>
+.imgC{
+    width: 250px;
+    height: 80px;
+    margin-right: 5px;
+}
+
+.imgB{
+    position: relative;
+    left: -75px;
+    z-index:-1
+}
+.anTitle{
+    position: relative;
+}
+.testBall{
+    position: relative;
+width: 150px;
+    
+}
+.ball{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: red;
+    border-radius: 100%;
+    right: 0;
+    top: 0;
+}
 .box{
     margin: 0 auto;
     background: black;
