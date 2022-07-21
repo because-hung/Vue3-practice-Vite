@@ -66,7 +66,18 @@ if(status.value == true){
 return result
 })
 
+const aryAA = [1,2,3]
+const aryBB = [2,3,4]
+
 const anFlag = ref(false)
+
+ const testNum = ref(1)
+    function clickAA() {
+      testNum.value = 2
+    }
+    function clickBB() {
+      testNum.value = 1
+    }
 
 function toAN(){
     const btnDom = document.querySelector('.imgB')
@@ -84,11 +95,28 @@ btnDom.style.zIndex = 0
 <template>
 <div class="container">
     <h2 @click='toAN()' class="anTitle">test animation</h2>
-    <div class="testBall">123<div class="ball"></div></div>
-    <div class="group">
-    <img class='imgA imgC' src="@/assets/test/btn04.jpg" alt="">
-    <img class='imgB imgC' src="@/assets/test/btn05.jpg" alt="">
+    <h2>{{testNum}}</h2>
+      <div class="group">
+    <img @click="clickAA()" class='imgA imgC' src="@/assets/test/btn04.jpg" alt="">
+    <img @click="clickBB()" class='imgB imgC' src="@/assets/test/btn05.jpg" alt="">
+    <p></p>
+    <p></p>
     </div>
+    <div class="div"  v-if='testNum === 1'>
+    <ul v-for='(item, i) in aryAA' :key='i'>
+        <li>{{item}}</li>
+    </ul>
+    </div>
+    <div class="div" v-if='testNum === 2'>   
+    <ul v-for='(item, i) in aryBB' :key='i'>
+        <li>{{item}}</li>
+    </ul>
+    </div>
+    <div class="noData" v-if='(testNum == 1 && aryAA.length == 0) || (testNum == 2 && aryBB.length == 0)'>
+        <h2>hello world</h2>
+    </div>
+    <div class="testBall">123<div class="ball"></div></div>
+  
     <div v-if="anFlag" class="box displayB">copied</div>
     <h2 v-if='false'>test vite require</h2>
 <ul v-if='false' v-for='(item, index, i) in imgList' :key='i'>
@@ -114,8 +142,7 @@ btnDom.style.zIndex = 0
 .imgB{
     position: relative;
     left: -75px;
-    z-index:-1
-}
+    }
 .anTitle{
     position: relative;
 }
