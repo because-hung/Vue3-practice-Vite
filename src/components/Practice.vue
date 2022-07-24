@@ -1,6 +1,32 @@
 <script setup>
 import { computed, reactive, ref } from "vue";
 
+// thousand
+
+let thA = "222122122.7812" // 222,122,122.78
+let thB = Number(thA).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') //使用正则替换，每隔三个数加一个','
+
+console.log(thB)
+
+
+// copy
+
+function copyWrite(){
+
+
+const range = document.createRange()
+const texts = document.querySelector('.allcopy')
+  range.selectNode(texts)
+  // 取得 Selection 物件
+const selection = window.getSelection()
+  selection.addRange(range)
+document.execCommand("copy")
+}
+
+
+//
+
+
 const imgList = reactive([
     {
     img1: 'src/assets/test/btn00.png',
@@ -94,6 +120,14 @@ btnDom.style.zIndex = 0
 </script>
 <template>
 <div class="container">
+    <h2>test copy</h2>
+    <div class="allcopy" >
+        <h4 class="billNum">billNo: 123456489797981623</h4>
+        <div class="title">wang</div>
+        <span class="todo">live coding</span>
+        <button @click="copyWrite()">copy memememe</button>
+    </div>
+
     <h2 @click='toAN()' class="anTitle">test animation</h2>
     <h2>{{testNum}}</h2>
       <div class="group">
