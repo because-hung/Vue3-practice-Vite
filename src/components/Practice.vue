@@ -23,6 +23,13 @@ const selection = window.getSelection()
 document.execCommand("copy")
 }
 
+// two box
+
+const boxFlag = ref(false)
+
+function openBox(){
+    boxFlag.value = !boxFlag.value
+}
 
 //
 
@@ -120,6 +127,13 @@ btnDom.style.zIndex = 0
 </script>
 <template>
 <div class="container">
+    <h2 @click="openBox()">test box</h2>
+    <!-- rotate arrow -->
+    <div class="oner">
+        <div class="oBoxA"> <img  :class="{'openArrow': boxFlag }" class="arrowDown" src="../assets/test/arrowDown.png" alt=""></div>
+        <div class="oBox oBoxB" v-if='boxFlag'></div>
+       
+    </div>
     <h2>test copy</h2>
     <div class="allcopy" >
         <h4 class="billNum">billNo: 123456489797981623</h4>
@@ -167,6 +181,41 @@ btnDom.style.zIndex = 0
 </template>
 
 <style scoped>
+.arrowDown{
+    width: 50px;
+    height: 20px;
+    position: relative;
+    top: 40px;
+    left: 100px;
+    margin: 20px 0px;
+}
+.openArrow{
+  transform: rotate(180deg);
+}
+.oBox{
+    width: 300px;
+    height: 100px;
+    background: red;
+}
+
+.oBoxA{
+    width: 300px;
+    height: 100px;
+    border: 1px blue solid;
+    box-shadow: 1px 1px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* border-radius: 10px; */
+
+}
+
+.oBoxB{
+       border: 1px red solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    /* border-radius: 10px; */
+
+}
 .imgC{
     width: 250px;
     height: 80px;
